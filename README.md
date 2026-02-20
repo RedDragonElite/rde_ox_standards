@@ -1,372 +1,314 @@
-# 🐉 RED DRAGON ELITE | OX DEVELOPMENT STANDARDS v1.0
+# 🐉 RDE | OX Development Standards v1.0
 
 <div align="center">
 
-**The Most Comprehensive ox_core Development Guide**
+![Version](https://img.shields.io/badge/version-1.0.0-red?style=for-the-badge&logo=github)
+![License](https://img.shields.io/badge/license-RDE%20Black%20Flag%20v6.66-black?style=for-the-badge)
+![ox_core](https://img.shields.io/badge/ox__core-Only-blue?style=for-the-badge)
+![Free](https://img.shields.io/badge/price-FREE%20FOREVER-brightgreen?style=for-the-badge)
 
-[![ox_core](https://img.shields.io/badge/Framework-ox__core-blue.svg)](https://github.com/overextended/ox_core)
-[![ox_lib](https://img.shields.io/badge/UI-ox__lib_v3-purple.svg)](https://github.com/overextended/ox_lib)
-[![Quality](https://img.shields.io/badge/Quality-Production-gold.svg)]()
-[![License](https://img.shields.io/badge/License-MIT-green.svg)]()
+**The internal development standard behind every RDE resource.**
+Battle-tested across 55+ production scripts. Zero compromises.
 
-*Built from 55+ production scripts. Battle-tested. Zero compromises.*
+*Built by [Red Dragon Elite](https://rd-elite.com) | SerpentsByte*
 
 </div>
 
 ---
 
-## 📜 Manifesto
+## 📖 Table of Contents
 
-> *Fuck CFX and their gatekeeper bullshit.*
-> 
-> *They silently reject everything that's too good, too free, and too decentralized – but we build the future anyway.*
-
-**OX ONLY. Next-Gen Only. Free Forever.**
-
-We are already inside. SYSTEM FAILURE for the Low-Vibration Entities.
-
----
-
-## 🎯 Core Principles (The RDE Philosophy)
-
-### 1. **Free & Open Source, Always**
-- ✅ MIT License on everything
-- ✅ Full code transparency on GitHub
-- ✅ Community-first development
-- ✅ No paywalls, ever
-
-### 2. **Next-Gen Technology Stack**
-```
-✅ ox_core (Player/Group Management)
-✅ ox_lib (UI/Utils)
-✅ ox_inventory (Items/Weapons)
-✅ ox_target (Interactions)
-✅ oxmysql (Database)
-
-❌ NO QB-Core
-❌ NO ESX
-❌ NO Legacy Frameworks
-```
-
-### 3. **Ultra-Optimized & Lag-Free**
-- 🚀 **Statebags** for all realtime data
-- 🚀 **No unnecessary entities/networked objects**
-- 🚀 **Aggressive caching**
-- 🚀 **Minimal loops** (always with proper Wait())
-- 🚀 **Deferred SQL** where possible
-
-### 4. **Beautiful Modern UI**
-- 🎨 ox_lib Mantine-based components
-- 🎨 Colorful icons from [icons.overextended.dev](https://icons.overextended.dev/)
-- 🎨 Smooth ProgressBars/Circles
-- 🎨 Context menus with rich metadata
-- 🎨 Notifications with sounds
-- 🎨 FontAwesome integration
-
-### 5. **Multilanguage Support**
-- 🌍 English (default)
-- 🌍 German (full support)
-- 🌍 Easy to add more
-- 🌍 Centralized in `locales/en.lua` & `locales/de.lua`
-
-### 6. **Realistic & Immersive**
-- 🎮 Lifelike gameplay features
-- 🎮 No arcade mechanics
-- 🎮 Proper physics and interactions
-- 🎮 Attention to detail
-
-### 7. **Bulletproof Security**
-- 🛡️ ACE Permissions
-- 🛡️ ox_core Groups integration
-- 🛡️ Steam ID whitelisting
-- 🛡️ Server-side validation on ALL actions
-
-### 8. **Auto-Setup & Zero Config**
-- ⚙️ oxmysql tables auto-create with `rde_` prefix
-- ⚙️ Sensible defaults
-- ⚙️ Works out of the box
-- ⚙️ Easy to customize
+- [Philosophy](#-philosophy)
+- [Core Principles](#-core-principles)
+- [Technology Stack](#-technology-stack)
+- [fxmanifest Template](#-fxmanifest-template)
+- [server.cfg Start Order](#-servercfg-start-order)
+- [Statebags](#-1-statebags-for-realtime-sync)
+- [ox_lib UI](#-2-ox_lib-ui-masterclass)
+- [Locales & Config](#-3-locales--config-structure)
+- [Database](#-4-database-best-practices)
+- [Security & Permissions](#-5-security--permissions)
+- [ox_target Integration](#-6-ox_target-integration)
+- [Performance](#-7-performance-optimization)
+- [Resource Template](#-complete-resource-template)
+- [Essential Resources](#-essential-resources)
+- [License](#-license)
 
 ---
 
-## 📦 Dependencies & Start Order
+## 🎯 Philosophy
 
-### fxmanifest.lua Template
+This document is the internal standard behind every RDE resource. Every script we release is built against these rules — no exceptions, no shortcuts.
+
+**OX only. Next-gen only. Free forever.**
+
+We don't gatekeep knowledge. Read this, understand it, build better things.
+
+---
+
+## 🏴 Core Principles
+
+### 1. Free & Open Source — Always
+Every RDE resource is source-available, forkable, and free. If you paid for any of our scripts, you got scammed. No subscriptions, no obfuscation, no paywalls — ever.
+
+### 2. Next-Gen Stack Only
+We build exclusively on the OX ecosystem. No legacy frameworks, no ESX shims, no QB-Core compatibility layers. Clean from the ground up.
+
+### 3. Performance First
+Statebags over polling. Caching over repeat queries. Event-driven over tick-based. Every thread has a `Wait()`. Nothing runs at frame rate unless it absolutely has to.
+
+### 4. Beautiful, Consistent UI
+ox_lib Mantine components everywhere. Lucide icons from [icons.overextended.dev](https://icons.overextended.dev/). Consistent color language. Smooth progress bars. No ugly raw chat prints as UI.
+
+### 5. Multilanguage by Default
+Every resource ships with English and German. Locales live in `locales/en.lua` and `locales/de.lua`. Adding a new language is always a single file.
+
+### 6. Bulletproof Security
+Server-side validation on every action. Triple-layer admin verification — ACE + ox_core groups + Steam ID. No client-authoritative logic for anything that matters.
+
+### 7. Zero Config to Start
+`oxmysql` tables auto-create with `rde_` prefix. Sensible defaults in `config.lua`. Works out of the box. Easy to customize when needed.
+
+---
+
+## 🔧 Technology Stack
+
+```
+✅ ox_core      — Player, character, group management
+✅ ox_lib       — UI, callbacks, commands, utilities
+✅ ox_inventory — Items, weapons, stashes
+✅ ox_target    — World interactions
+✅ oxmysql      — Database layer
+
+❌ QBCore
+❌ ESX
+❌ Any legacy framework
+```
+
+---
+
+## 📄 fxmanifest Template
 
 ```lua
 fx_version 'cerulean'
 game 'gta5'
 lua54 'yes'
 
-name 'rde_yourscript'
-author 'Red Dragon Elite'
-description 'Your amazing script description'
-version '1.0.0'
+name        'rde_yourscript'
+author      'Red Dragon Elite'
+description 'Description of your script'
+version     '1.0.0'
 
 dependencies {
-    '/server:7290', -- Minimum FiveM Build
+    '/server:7290',   -- minimum FiveM build
     'oxmysql',
     'ox_lib',
     'ox_core',
-    'ox_target',    -- Optional but recommended
-    'ox_inventory'  -- If items/weapons needed
+    'ox_target',      -- if using world interactions
+    'ox_inventory'    -- if using items or weapons
 }
 
--- CRITICAL: Load ox_lib first!
-shared_script '@ox_lib/init.lua'
-
--- Shared configuration
 shared_scripts {
+    '@ox_lib/init.lua',
+    '@ox_core/lib/init.lua',
     'config.lua',
     'locales/*.lua'
 }
 
--- Server logic
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
     'server/*.lua'
 }
 
--- Client logic
 client_scripts {
     'client/*.lua'
 }
 
--- UI (if needed)
+-- Only if using a NUI panel
 ui_page 'web/index.html'
-
-files {
-    'web/**/*'
-}
+files { 'web/**/*' }
 ```
 
-### server.cfg Start Order
+---
+
+## 📋 server.cfg Start Order
 
 ```cfg
-# CRITICAL: Start in this exact order!
+# Always in this exact order
 ensure oxmysql
 ensure ox_lib
 ensure ox_core
 ensure ox_target
 ensure ox_inventory
 
-# Your RDE scripts
+# RDE scripts after all dependencies
 ensure rde_yourscript
 ```
 
 ---
 
-## 🎓 Best Practices from coxdocs.dev
+## 📡 1. Statebags for Realtime Sync
 
-### 🌐 1. Statebags for Realtime Sync
+Statebags are the backbone of all RDE realtime data. No polling, no lag, no sync issues.
 
-**The Problem:**
-Traditional entity state management causes:
-- Network lag
-- Sync issues
-- Entity limit problems
-
-**The Solution: Statebags**
+### Setting Player State (Server)
 
 ```lua
--- Server-side: Set player state
-local player = Ox.GetPlayer(source)
 local PlayerState = Player(source).state
 
--- Set with replication to all clients
-PlayerState:set('wantedLevel', 3, true) -- true = replicate realtime
+-- true = replicate to all clients instantly
+PlayerState:set('wantedLevel', 3, true)
 PlayerState:set('jobGrade', player.getGroup('police'), true)
 ```
 
+### Reacting to State Changes (Client)
+
 ```lua
--- Client-side: React to state changes
 lib.onCache('wantedLevel', function(value)
-    print('My wanted level is now: ' .. value)
-    -- Update UI, spawn cops, etc.
+    print('Wanted level is now: ' .. value)
+    -- update UI, trigger logic, etc.
 end)
 ```
 
-**Perfect for:**
-- ✅ Player data (wanted level, job, status)
-- ✅ Props (position, rotation, owner)
-- ✅ Custom entities (vehicles, objects)
-- ✅ Zone states (lockdown, events)
-- ✅ Any realtime shared data
-
-**Example: rde_props with Statebags**
+### Global State for World Objects (e.g. Props)
 
 ```lua
--- Server: Create prop with statebag
+-- Server: create a prop statebag
 local propId = generateUniqueId()
 GlobalState['rde_props_' .. propId] = {
-    model = 'prop_chair_01',
+    model  = 'prop_chair_01',
     coords = vector3(x, y, z),
-    rotation = vector3(0, 0, 0),
-    owner = identifier,
-    locked = false
+    owner  = identifier,
+    locked = false,
 }
 
--- Client: Auto-sync all props
+-- Client: react automatically on all clients
 AddStateBagChangeHandler('rde_props_', nil, function(bagName, key, value)
     if value then
-        spawnProp(value) -- Automatically spawned on all clients!
+        spawnProp(value)   -- spawned on all clients
     else
-        deleteProp(bagName) -- Automatically deleted!
+        deleteProp(bagName) -- deleted on all clients
     end
 end)
 ```
 
+**Use statebags for:** player data, prop states, zone states, vehicle states, any realtime shared data.
+
 ---
 
-### 🎨 2. ox_lib UI Masterclass
+## 🎨 2. ox_lib UI Masterclass
 
-**Core Components:**
+### Notifications
 
-#### Notifications
 ```lua
 lib.notify({
-    title = 'Success',
+    title       = 'Success',
     description = 'Item purchased!',
-    type = 'success', -- 'success', 'error', 'info', 'warning'
-    icon = 'shopping-cart',
-    iconColor = '#10b981',
-    duration = 5000,
-    position = 'top-right'
+    type        = 'success',   -- 'success' | 'error' | 'info' | 'warning'
+    icon        = 'shopping-cart',
+    iconColor   = '#10b981',
+    duration    = 5000,
+    position    = 'top-right'
 })
 ```
 
-#### Progress Bars/Circles
+### Progress Bar
+
 ```lua
--- Progress Bar
 if lib.progressBar({
-    duration = 5000,
-    label = 'Picking lock...',
+    duration     = 5000,
+    label        = 'Picking lock...',
     useWhileDead = false,
-    canCancel = true,
-    disable = {
-        car = true,
-        move = true,
-        combat = true
-    },
-    anim = {
+    canCancel    = true,
+    disable      = { car = true, move = true, combat = true },
+    anim         = {
         dict = 'anim@amb@clubhouse@tutorial@bkr_tut_ig3@',
         clip = 'machinic_loop_mechandplayer'
     }
 }) then
-    print('Lock picked!')
+    -- completed
 else
-    print('Cancelled!')
-end
-
--- Progress Circle (radial)
-if lib.progressCircle({
-    duration = 3000,
-    position = 'bottom',
-    label = 'Hacking...',
-    useWhileDead = false,
-    canCancel = true
-}) then
-    print('Hacked!')
+    -- cancelled
 end
 ```
 
-#### Context Menus
+### Progress Circle
+
+```lua
+if lib.progressCircle({
+    duration     = 3000,
+    position     = 'bottom',
+    label        = 'Hacking...',
+    useWhileDead = false,
+    canCancel    = true,
+}) then
+    -- completed
+end
+```
+
+### Context Menu
+
 ```lua
 lib.registerContext({
-    id = 'rde_vehicle_menu',
-    title = '🚗 Vehicle Menu',
+    id      = 'rde_vehicle_menu',
+    title   = '🚗 Vehicle Menu',
     options = {
         {
-            title = 'Lock/Unlock',
+            title       = 'Lock / Unlock',
             description = 'Toggle vehicle locks',
-            icon = 'lock',
-            iconColor = '#3b82f6',
-            onSelect = function()
+            icon        = 'lock',
+            iconColor   = '#3b82f6',
+            onSelect    = function()
                 TriggerEvent('rde_vehicle:toggleLock')
-            end
+            end,
         },
         {
-            title = 'Engine',
-            description = 'Toggle engine on/off',
-            icon = 'gear',
-            iconColor = '#10b981',
-            onSelect = function()
-                TriggerEvent('rde_vehicle:toggleEngine')
-            end
-        },
-        {
-            title = 'Trunk',
+            title       = 'Trunk',
             description = 'Open trunk inventory',
-            icon = 'box',
-            iconColor = '#f59e0b',
-            arrow = true, -- Shows arrow indicating submenu
-            onSelect = function()
+            icon        = 'box',
+            iconColor   = '#f59e0b',
+            arrow       = true,
+            onSelect    = function()
                 exports.ox_inventory:openInventory('trunk', vehicleNetId)
-            end
-        }
+            end,
+        },
     }
 })
 
 lib.showContext('rde_vehicle_menu')
 ```
 
-#### Input Dialogs
+### Input Dialog
+
 ```lua
 local input = lib.inputDialog('Create Prop', {
-    {
-        type = 'input',
-        label = 'Prop Name',
-        description = 'Enter a name for this prop',
-        required = true,
-        icon = 'tag'
+    { type = 'input',    label = 'Prop Name',  required = true, icon = 'tag' },
+    { type = 'select',   label = 'Category',
+      options = {
+          { value = 'furniture',  label = 'Furniture' },
+          { value = 'structural', label = 'Structural' },
+      },
+      default = 'furniture'
     },
-    {
-        type = 'select',
-        label = 'Category',
-        options = {
-            {value = 'furniture', label = 'Furniture'},
-            {value = 'decoration', label = 'Decoration'},
-            {value = 'structural', label = 'Structural'}
-        },
-        default = 'furniture'
-    },
-    {
-        type = 'number',
-        label = 'Price',
-        description = 'Purchase price',
-        icon = 'dollar-sign',
-        required = true,
-        min = 0,
-        max = 1000000
-    },
-    {
-        type = 'checkbox',
-        label = 'Allow Public Use',
-        checked = false
-    }
+    { type = 'number',   label = 'Price', icon = 'dollar-sign', required = true, min = 0, max = 1000000 },
+    { type = 'checkbox', label = 'Allow Public Use', checked = false },
 })
 
 if input then
-    local name = input[1]
-    local category = input[2]
-    local price = input[3]
-    local publicUse = input[4]
-    
+    local name, category, price, publicUse = input[1], input[2], input[3], input[4]
     TriggerServerEvent('rde_props:create', name, category, price, publicUse)
 end
 ```
 
-#### Alert Dialogs
+### Alert Dialog
+
 ```lua
 local alert = lib.alertDialog({
-    header = 'Delete Prop?',
-    content = 'Are you sure you want to delete this prop? This cannot be undone.',
+    header  = 'Delete Prop?',
+    content = 'This cannot be undone.',
     centered = true,
-    cancel = true,
-    labels = {
-        confirm = 'Delete',
-        cancel = 'Cancel'
-    }
+    cancel  = true,
+    labels  = { confirm = 'Delete', cancel = 'Cancel' }
 })
 
 if alert == 'confirm' then
@@ -374,336 +316,205 @@ if alert == 'confirm' then
 end
 ```
 
----
-
-### 🎯 3. Admin Menu Example (Realtime CRUD)
-
-**Complete admin panel with ox_lib:**
+### Admin CRUD Menu Pattern
 
 ```lua
--- Client: admin_menu.lua
-
 local function openPropAdminMenu()
-    -- Request current props from server
     local props = lib.callback.await('rde_props:getAll', false)
-    
-    local options = {}
-    
-    -- Add "Create New" option
-    table.insert(options, {
-        title = '➕ Create New Prop',
-        icon = 'plus-circle',
-        iconColor = '#10b981',
-        onSelect = function()
-            createPropDialog()
-        end
-    })
-    
-    -- List all existing props
+    local options = {
+        {
+            title    = '➕ Create New Prop',
+            icon     = 'plus-circle',
+            iconColor = '#10b981',
+            onSelect = function() createPropDialog() end,
+        }
+    }
+
     for _, prop in ipairs(props) do
         table.insert(options, {
-            title = prop.name,
+            title       = prop.name,
             description = ('Owner: %s | Category: %s'):format(prop.owner, prop.category),
-            icon = 'cube',
-            iconColor = '#3b82f6',
-            metadata = {
-                {label = 'Position', value = ('%.2f, %.2f, %.2f'):format(prop.coords.x, prop.coords.y, prop.coords.z)},
-                {label = 'Rotation', value = ('%.2f°'):format(prop.rotation.z)},
-                {label = 'Public', value = prop.public and 'Yes' or 'No'}
+            icon        = 'cube',
+            iconColor   = '#3b82f6',
+            metadata    = {
+                { label = 'Position', value = ('%.2f, %.2f, %.2f'):format(prop.coords.x, prop.coords.y, prop.coords.z) },
+                { label = 'Rotation', value = ('%.2f°'):format(prop.rotation.z) },
+                { label = 'Public',   value = prop.public and 'Yes' or 'No' },
             },
-            arrow = true,
-            onSelect = function()
-                openPropOptionsMenu(prop)
-            end
+            arrow    = true,
+            onSelect = function() openPropOptionsMenu(prop) end,
         })
     end
-    
-    lib.registerContext({
-        id = 'rde_props_admin',
-        title = '🛠️ Prop Management',
-        options = options
-    })
-    
+
+    lib.registerContext({ id = 'rde_props_admin', title = '🛠️ Prop Management', options = options })
     lib.showContext('rde_props_admin')
 end
-
-local function openPropOptionsMenu(prop)
-    lib.registerContext({
-        id = 'rde_prop_options',
-        title = prop.name,
-        menu = 'rde_props_admin',
-        options = {
-            {
-                title = '✏️ Edit',
-                icon = 'edit',
-                iconColor = '#3b82f6',
-                onSelect = function()
-                    editPropDialog(prop)
-                end
-            },
-            {
-                title = '📍 Teleport',
-                icon = 'map-pin',
-                iconColor = '#10b981',
-                onSelect = function()
-                    SetEntityCoords(cache.ped, prop.coords.x, prop.coords.y, prop.coords.z)
-                end
-            },
-            {
-                title = '🗑️ Delete',
-                icon = 'trash',
-                iconColor = '#ef4444',
-                onSelect = function()
-                    local confirm = lib.alertDialog({
-                        header = 'Delete Prop?',
-                        content = ('Delete "%s"? This cannot be undone.'):format(prop.name),
-                        centered = true,
-                        cancel = true
-                    })
-                    
-                    if confirm == 'confirm' then
-                        TriggerServerEvent('rde_props:delete', prop.id)
-                        lib.notify({
-                            title = 'Success',
-                            description = 'Prop deleted',
-                            type = 'success'
-                        })
-                    end
-                end
-            }
-        }
-    })
-    
-    lib.showContext('rde_prop_options')
-end
-
--- Register command
-lib.addCommand('propsmenu', {
-    help = 'Open prop management menu',
-    restricted = 'group.admin'
-}, function(source, args, raw)
-    openPropAdminMenu()
-end)
 ```
 
 ---
 
-### 🌍 4. Locales & Config Structure
+## 🌍 3. Locales & Config Structure
 
-#### config.lua
+### config.lua
+
 ```lua
 Config = {}
 
--- Locale (auto-detect from ox:locale convar)
-Config.Locale = GetConvar('ox:locale', 'en')
+Config.Locale   = GetConvar('ox:locale', 'en')
+Config.Debug    = false
 
--- Icons (centralized, easy to change)
 Config.Icons = {
-    success = 'check-circle',
-    error = 'x-circle',
-    warning = 'alert-triangle',
-    info = 'info',
-    police = 'shield',
-    medical = 'heart-pulse',
+    success  = 'check-circle',
+    error    = 'x-circle',
+    warning  = 'alert-triangle',
+    info     = 'info',
+    police   = 'shield',
+    medical  = 'heart-pulse',
     mechanic = 'wrench',
-    money = 'dollar-sign',
-    vehicle = 'car',
-    weapon = 'gun',
-    food = 'utensils',
-    drink = 'glass-water'
+    money    = 'dollar-sign',
+    vehicle  = 'car',
+    weapon   = 'gun',
 }
 
--- Colors (Mantine color names or hex)
 Config.Colors = {
     primary = 'blue',
     success = 'green',
-    error = 'red',
+    error   = 'red',
     warning = 'yellow',
-    info = 'cyan',
-    police = 'blue',
-    medical = 'red',
-    mechanic = 'orange'
+    info    = 'cyan',
 }
 
--- Feature Toggles
-Config.Features = {
-    enableLogging = true,
-    enableNotifications = true,
-    enableStatebags = true
-}
-
--- Performance
 Config.Performance = {
-    updateInterval = 1000, -- ms
-    maxObjects = 100,
-    renderDistance = 50.0
+    updateInterval  = 1000,   -- ms
+    maxObjects      = 100,
+    renderDistance  = 50.0,
 }
 
 return Config
 ```
 
-#### locales/en.lua
+### locales/en.lua
+
 ```lua
 return {
-    -- General
-    success = 'Success',
-    error = 'Error',
-    warning = 'Warning',
-    info = 'Information',
-    
-    -- Actions
-    press_to_interact = 'Press ~INPUT_CONTEXT~ to interact',
-    processing = 'Processing...',
-    
-    -- Props
-    prop_placed = 'Prop placed successfully',
-    prop_deleted = 'Prop deleted',
-    prop_moved = 'Prop moved',
-    prop_not_found = 'Prop not found',
-    
-    -- Permissions
-    no_permission = 'You do not have permission',
-    admin_only = 'Admin access required',
-    
-    -- UI
-    confirm = 'Confirm',
-    cancel = 'Cancel',
-    close = 'Close',
-    save = 'Save',
-    delete = 'Delete'
+    success            = 'Success',
+    error              = 'Error',
+    warning            = 'Warning',
+    info               = 'Information',
+    press_to_interact  = 'Press ~INPUT_CONTEXT~ to interact',
+    processing         = 'Processing...',
+    prop_placed        = 'Prop placed successfully',
+    prop_deleted       = 'Prop deleted',
+    prop_not_found     = 'Prop not found',
+    no_permission      = 'You do not have permission',
+    confirm            = 'Confirm',
+    cancel             = 'Cancel',
+    close              = 'Close',
+    save               = 'Save',
+    delete             = 'Delete',
 }
 ```
 
-#### locales/de.lua
+### locales/de.lua
+
 ```lua
 return {
-    -- Allgemein
-    success = 'Erfolg',
-    error = 'Fehler',
-    warning = 'Warnung',
-    info = 'Information',
-    
-    -- Aktionen
-    press_to_interact = 'Drücke ~INPUT_CONTEXT~ zum Interagieren',
-    processing = 'Verarbeitung...',
-    
-    -- Props
-    prop_placed = 'Prop erfolgreich platziert',
-    prop_deleted = 'Prop gelöscht',
-    prop_moved = 'Prop verschoben',
-    prop_not_found = 'Prop nicht gefunden',
-    
-    -- Berechtigungen
-    no_permission = 'Keine Berechtigung',
-    admin_only = 'Admin-Zugriff erforderlich',
-    
-    -- UI
-    confirm = 'Bestätigen',
-    cancel = 'Abbrechen',
-    close = 'Schließen',
-    save = 'Speichern',
-    delete = 'Löschen'
+    success            = 'Erfolg',
+    error              = 'Fehler',
+    warning            = 'Warnung',
+    info               = 'Information',
+    press_to_interact  = 'Drücke ~INPUT_CONTEXT~ zum Interagieren',
+    processing         = 'Verarbeitung...',
+    prop_placed        = 'Prop erfolgreich platziert',
+    prop_deleted       = 'Prop gelöscht',
+    prop_not_found     = 'Prop nicht gefunden',
+    no_permission      = 'Keine Berechtigung',
+    confirm            = 'Bestätigen',
+    cancel             = 'Abbrechen',
+    close              = 'Schließen',
+    save               = 'Speichern',
+    delete             = 'Löschen',
 }
 ```
 
-#### Using Locales
+### Using Locales in Code
+
 ```lua
--- Load locale
 local locale = lib.load('locales.' .. Config.Locale)
 
--- Use in code
-lib.notify({
-    description = locale.prop_placed,
-    type = 'success'
-})
-
--- With string.format
-lib.notify({
-    description = locale('prop_value', propName, propPrice)
-})
+lib.notify({ description = locale.prop_placed, type = 'success' })
 ```
 
 ---
 
-### 🗄️ 5. Database Best Practices
+## 🗄️ 4. Database Best Practices
 
-#### Auto-Create Tables on Start
+### Auto-Create Tables on Start
 
 ```lua
 -- server/database.lua
-
 MySQL.ready(function()
-    -- Props table
     MySQL.query([[
         CREATE TABLE IF NOT EXISTS `rde_props` (
-            `id` INT AUTO_INCREMENT PRIMARY KEY,
-            `name` VARCHAR(255) NOT NULL,
-            `model` VARCHAR(255) NOT NULL,
-            `coords` JSON NOT NULL,
-            `rotation` JSON NOT NULL,
-            `owner` VARCHAR(50) NOT NULL,
-            `category` VARCHAR(50) DEFAULT 'misc',
-            `public` BOOLEAN DEFAULT FALSE,
-            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            INDEX `idx_owner` (`owner`),
+            `id`         INT AUTO_INCREMENT PRIMARY KEY,
+            `name`       VARCHAR(255) NOT NULL,
+            `model`      VARCHAR(255) NOT NULL,
+            `coords`     JSON         NOT NULL,
+            `rotation`   JSON         NOT NULL,
+            `owner`      VARCHAR(50)  NOT NULL,
+            `category`   VARCHAR(50)  DEFAULT 'misc',
+            `public`     BOOLEAN      DEFAULT FALSE,
+            `created_at` TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
+            `updated_at` TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            INDEX `idx_owner`    (`owner`),
             INDEX `idx_category` (`category`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     ]])
-    
     print('^2[RDE] Database tables initialized^0')
 end)
 ```
 
-#### Async Queries (Proper Pattern)
+### Always Use Prepared Statements
 
 ```lua
--- BAD: Blocking
-local result = MySQL.query.await('SELECT * FROM rde_props')
+-- ❌ NEVER — SQL injection risk
+MySQL.query('SELECT * FROM rde_props WHERE id = ' .. propId)
 
--- GOOD: Async with callback
-MySQL.query('SELECT * FROM rde_props WHERE owner = ?', {identifier}, function(result)
+-- ✅ ALWAYS
+MySQL.query('SELECT * FROM rde_props WHERE id = ?', { propId })
+
+-- Multi-param insert
+MySQL.query('INSERT INTO rde_props (name, model, coords, owner) VALUES (?, ?, ?, ?)', {
+    name, model, json.encode(coords), identifier
+})
+```
+
+### Async Query Patterns
+
+```lua
+-- Avoid blocking await in hot paths — use callbacks where possible
+MySQL.query('SELECT * FROM rde_props WHERE owner = ?', { identifier }, function(result)
     if result and #result > 0 then
-        -- Process result
+        -- process
     end
 end)
 
--- BEST: Using lib.callback for client-server
+-- For lib.callback (client-server bridge) await is fine
 lib.callback.register('rde_props:getAll', function(source)
     local player = Ox.GetPlayer(source)
     if not player then return {} end
-    
-    local result = MySQL.query.await('SELECT * FROM rde_props WHERE owner = ?', {
+
+    return MySQL.query.await('SELECT * FROM rde_props WHERE owner = ?', {
         player.getIdentifier('license')
-    })
-    
-    return result or {}
+    }) or {}
 end)
-```
-
-#### Prepared Statements (Always!)
-
-```lua
--- NEVER do this (SQL injection risk):
-MySQL.query('SELECT * FROM rde_props WHERE id = ' .. propId)
-
--- ALWAYS do this:
-MySQL.query('SELECT * FROM rde_props WHERE id = ?', {propId})
-
--- Multiple parameters:
-MySQL.query('INSERT INTO rde_props (name, model, coords, owner) VALUES (?, ?, ?, ?)', {
-    name,
-    model,
-    json.encode(coords),
-    identifier
-})
 ```
 
 ---
 
-### 🛡️ 6. Security & Permissions
+## 🛡️ 5. Security & Permissions
 
-**Triple-Layer Security System:**
+### Triple-Layer Admin Verification
 
 ```lua
 -- server/permissions.lua
@@ -711,126 +522,97 @@ MySQL.query('INSERT INTO rde_props (name, model, coords, owner) VALUES (?, ?, ?,
 local function isAdmin(source)
     local player = Ox.GetPlayer(source)
     if not player then return false end
-    
-    -- Layer 1: ACE Permissions (Recommended!)
-    if IsPlayerAceAllowed(source, 'rde.admin') then
-        return true
-    end
-    
-    -- Layer 2: ox_core Groups
+
+    -- Layer 1: ACE (preferred)
+    if IsPlayerAceAllowed(source, 'rde.admin') then return true end
+
+    -- Layer 2: ox_core groups
     local group = player.getGroup('admin')
-    if group and group >= 1 then
-        return true
-    end
-    
-    -- Layer 3: Steam ID Whitelist (Fallback)
+    if group and group >= 1 then return true end
+
+    -- Layer 3: Steam ID whitelist (fallback)
     local steamId = player.getIdentifier('steam')
     if steamId then
         for _, allowedId in ipairs(Config.AdminSteamIds) do
-            if steamId == allowedId then
-                return true
-            end
+            if steamId == allowedId then return true end
         end
     end
-    
+
     return false
 end
 
--- Export for use in other scripts
 exports('isAdmin', isAdmin)
+```
 
--- Usage in events
+### Protecting Events
+
+```lua
 RegisterNetEvent('rde_props:delete', function(propId)
     local source = source
-    
-    -- Security check
+
     if not isAdmin(source) then
         print(('^1[SECURITY] Unauthorized delete attempt by %s^0'):format(GetPlayerName(source)))
         return
     end
-    
-    -- Proceed with deletion
-    MySQL.query('DELETE FROM rde_props WHERE id = ?', {propId})
-    
-    -- Update statebag
+
+    MySQL.query('DELETE FROM rde_props WHERE id = ?', { propId })
     GlobalState['rde_props_' .. propId] = nil
-    
     TriggerClientEvent('rde_props:deleted', -1, propId)
 end)
 ```
 
-**server.cfg ACE Setup:**
+### ACE Setup (server.cfg)
 
 ```cfg
-# Add admin ACE permission to group
 add_ace group.admin rde.admin allow
-
-# Add specific players to admin group
-add_principal identifier.steam:110000XXXXXXX group.admin
+add_principal identifier.steam:110000xxxxxxxx group.admin
 ```
 
 ---
 
-### 🎮 7. ox_target Integration
-
-**Basic Target Setup:**
+## 🎯 6. ox_target Integration
 
 ```lua
--- Client: target.lua
+-- client/target.lua
 
 local function setupPropTarget(prop)
     exports.ox_target:addSphereZone({
         coords = prop.coords,
         radius = 2.0,
-        debug = Config.Debug,
+        debug  = Config.Debug,
         options = {
             {
-                name = 'rde_prop_use',
-                label = locale('use_prop'),
-                icon = 'hand',
+                name     = 'rde_prop_use',
+                label    = locale.use_prop,
+                icon     = 'hand',
                 iconColor = Config.Colors.primary,
                 distance = 2.0,
-                canInteract = function(entity, distance, coords, name, bone)
+                canInteract = function()
                     return not prop.locked or isOwner(prop)
                 end,
-                onSelect = function(data)
+                onSelect = function()
                     TriggerServerEvent('rde_props:use', prop.id)
-                end
-            },
-            {
-                name = 'rde_prop_pickup',
-                label = locale('pickup_prop'),
-                icon = 'hand-grab',
-                iconColor = Config.Colors.warning,
-                distance = 2.0,
-                groups = {'admin'},
-                canInteract = function()
-                    return isAdmin()
                 end,
-                onSelect = function(data)
-                    TriggerServerEvent('rde_props:pickup', prop.id)
-                end
             },
             {
-                name = 'rde_prop_delete',
-                label = locale('delete_prop'),
-                icon = 'trash',
-                iconColor = Config.Colors.error,
-                distance = 2.0,
-                groups = {'admin', 'moderator'},
-                onSelect = function(data)
+                name      = 'rde_prop_delete',
+                label     = locale.delete_prop,
+                icon      = 'trash',
+                iconColor = '#ef4444',
+                distance  = 2.0,
+                groups    = { 'admin', 'moderator' },
+                onSelect  = function()
                     local confirm = lib.alertDialog({
-                        header = locale('confirm_delete'),
-                        content = locale('delete_warning'),
+                        header   = locale.confirm_delete,
+                        content  = locale.delete_warning,
                         centered = true,
-                        cancel = true
+                        cancel   = true,
                     })
-                    
                     if confirm == 'confirm' then
                         TriggerServerEvent('rde_props:delete', prop.id)
                     end
-                end
-            }
+                end,
+            },
         }
     })
 end
@@ -838,94 +620,65 @@ end
 
 ---
 
-### 📊 8. Performance Optimization
+## ⚡ 7. Performance Optimization
 
-**Critical Rules:**
+### Thread Rules
 
 ```lua
--- ❌ BAD: Blocking main thread
+-- ❌ BAD — runs 60+ times per second
 CreateThread(function()
     while true do
-        Wait(0) -- Runs every frame! (60+ times per second)
-        
-        local playerPed = PlayerPedId()
-        local coords = GetEntityCoords(playerPed)
-        
-        -- Expensive operation every frame
-        checkNearbyProps(coords)
+        Wait(0)
+        checkNearbyProps(GetEntityCoords(PlayerPedId()))
     end
 end)
 
--- ✅ GOOD: Reasonable intervals
+-- ✅ GOOD — once per second, uses cache
 CreateThread(function()
     while true do
-        Wait(1000) -- Only once per second
-        
-        local playerPed = cache.ped -- Use cache!
-        local coords = GetEntityCoords(playerPed)
-        
-        checkNearbyProps(coords)
+        Wait(1000)
+        checkNearbyProps(GetEntityCoords(cache.ped))
     end
 end)
 
--- ✅ BETTER: Event-driven
+-- ✅ BETTER — event-driven, no loop at all
 lib.onCache('ped', function(ped)
-    -- Only runs when ped changes
     setupPedInteractions(ped)
-end)
-
--- ✅ BEST: Combination
-local lastCheck = 0
-CreateThread(function()
-    while true do
-        local now = GetGameTimer()
-        
-        if now - lastCheck > 1000 then
-            lastCheck = now
-            checkNearbyProps()
-        end
-        
-        Wait(500) -- Check condition twice per second
-    end
 end)
 ```
 
-**Caching Strategy:**
+### Caching Strategy
 
 ```lua
--- Cache frequently accessed data
-local propsCache = {}
+local propsCache      = {}
 local lastCacheUpdate = 0
-local CACHE_DURATION = 60000 -- 1 minute
+local CACHE_DURATION  = 60000   -- 1 minute
 
 local function getProps()
     local now = GetGameTimer()
-    
     if now - lastCacheUpdate > CACHE_DURATION then
-        propsCache = lib.callback.await('rde_props:getAll', false)
+        propsCache      = lib.callback.await('rde_props:getAll', false)
         lastCacheUpdate = now
     end
-    
     return propsCache
 end
 
--- Invalidate cache when data changes
+-- Invalidate on server-side change
 RegisterNetEvent('rde_props:updated', function()
-    lastCacheUpdate = 0 -- Force refresh on next access
+    lastCacheUpdate = 0
 end)
 ```
 
-**Native Optimization:**
+### Native Calls
 
 ```lua
--- ❌ BAD: Calling natives in loops
+-- ❌ BAD — native called 100 times
 for i = 1, 100 do
-    local ped = PlayerPedId() -- Called 100 times!
-    DoSomething(ped)
+    DoSomething(PlayerPedId())
 end
 
--- ✅ GOOD: Cache natives outside loops
-local ped = cache.ped -- or PlayerPedId() once
+-- ✅ GOOD — cached once
+local ped = cache.ped
 for i = 1, 100 do
     DoSomething(ped)
 end
@@ -933,35 +686,10 @@ end
 
 ---
 
-## 📚 Essential Resources
-
-### Official Documentation
-- **Main Docs:** https://coxdocs.dev/
-- **ox_core:** https://coxdocs.dev/ox_core
-- **ox_lib:** https://coxdocs.dev/ox_lib
-- **ox_inventory:** https://coxdocs.dev/ox_inventory
-- **oxmysql:** https://github.com/overextended/oxmysql
-
-### Community & Examples
-- **CommunityOx GitHub:** https://github.com/CommunityOx
-- **Awesome OX List:** https://github.com/overextended/awesome-ox
-- **Example Scripts:** https://github.com/overextended
-
-### UI Resources
-- **Icon Library:** https://icons.overextended.dev/
-- **Mantine Colors:** https://mantine.dev/theming/colors/
-- **Mantine Components:** https://mantine.dev/core/
-
-### Tools
-- **FiveM Docs:** https://docs.fivem.net/
-- **Pleb Masters:** https://forge.plebmasters.de/
-- **GTA Native DB:** https://alloc8or.re/gta5/nativedb/
-
----
-
-## 🎓 Complete Resource Template
+## 📁 Complete Resource Template
 
 ### Folder Structure
+
 ```
 rde_yourscript/
 ├── fxmanifest.lua
@@ -978,7 +706,7 @@ rde_yourscript/
 │   ├── main.lua
 │   ├── ui.lua
 │   └── target.lua
-└── web/ (optional)
+└── web/              ← only if NUI panel needed
     ├── index.html
     ├── script.js
     └── style.css
@@ -986,153 +714,131 @@ rde_yourscript/
 
 ### Minimal Working Example
 
-**fxmanifest.lua:**
-```lua
-fx_version 'cerulean'
-game 'gta5'
-lua54 'yes'
-
-name 'rde_example'
-author 'Red Dragon Elite'
-version '1.0.0'
-
-dependencies {'ox_lib', 'ox_core', 'oxmysql'}
-
-shared_script '@ox_lib/init.lua'
-shared_scripts {'config.lua', 'locales/*.lua'}
-server_scripts {'@oxmysql/lib/MySQL.lua', 'server/*.lua'}
-client_scripts {'client/*.lua'}
-```
-
-**config.lua:**
-```lua
-return {
-    Locale = GetConvar('ox:locale', 'en'),
-    AdminGroups = {['admin'] = 1},
-    Debug = false
-}
-```
-
-**server/main.lua:**
+**server/main.lua**
 ```lua
 local Config = require 'config'
 
--- Auto-create table
 MySQL.ready(function()
     MySQL.query([[
         CREATE TABLE IF NOT EXISTS rde_example (
-            id INT AUTO_INCREMENT PRIMARY KEY,
+            id   INT AUTO_INCREMENT PRIMARY KEY,
             data JSON
         )
     ]])
 end)
 
--- Example event
 RegisterNetEvent('rde_example:action', function()
     local player = Ox.GetPlayer(source)
     if not player then return end
-    
     print(('Player %s triggered action'):format(player.name))
 end)
 ```
 
-**client/main.lua:**
+**client/main.lua**
 ```lua
-local Config = require 'config'
-
--- Example command
-lib.addCommand('example', {
-    help = 'Example command'
-}, function()
-    lib.notify({
-        description = 'Example works!',
-        type = 'success'
-    })
+lib.addCommand('example', { help = 'Example command' }, function()
+    lib.notify({ description = 'Example works!', type = 'success' })
 end)
 ```
 
 ---
 
-## 🔥 The RDE Difference
+## 📚 Essential Resources
 
-### What Makes Our Scripts Stand Out:
-
-**1. Production Quality**
-- ✅ Battle-tested in 55+ scripts
-- ✅ Zero compromises on code quality
-- ✅ Extensive error handling
-- ✅ Proper logging and debugging
-
-**2. Performance First**
-- ✅ < 0.01ms idle usage
-- ✅ Aggressive optimization
-- ✅ Smart caching strategies
-- ✅ No memory leaks
-
-**3. Beautiful UI**
-- ✅ Modern ox_lib components
-- ✅ Consistent design language
-- ✅ Colorful and intuitive
-- ✅ Mobile-responsive (where applicable)
-
-**4. Developer Experience**
-- ✅ Clean, readable code
-- ✅ Extensive comments
-- ✅ Modular architecture
-- ✅ Easy to customize
-
-**5. Community First**
-- ✅ Always free and open source
-- ✅ MIT License
-- ✅ Active support
-- ✅ No gatekeeping
+| Resource | Link |
+|---|---|
+| coxdocs.dev | [https://coxdocs.dev](https://coxdocs.dev) |
+| ox_core docs | [https://coxdocs.dev/ox_core](https://coxdocs.dev/ox_core) |
+| ox_lib docs | [https://coxdocs.dev/ox_lib](https://coxdocs.dev/ox_lib) |
+| ox_inventory docs | [https://coxdocs.dev/ox_inventory](https://coxdocs.dev/ox_inventory) |
+| oxmysql | [GitHub](https://github.com/communityox/oxmysql) |
+| Icon library | [icons.overextended.dev](https://icons.overextended.dev/) |
+| Mantine colors | [mantine.dev/theming/colors](https://mantine.dev/theming/colors/) |
+| Pleb Masters (props) | [forge.plebmasters.de](https://forge.plebmasters.de/objects) |
+| GTA Native DB | [alloc8or.re](https://alloc8or.re/gta5/nativedb/) |
+| FiveM Docs | [docs.fivem.net](https://docs.fivem.net/) |
 
 ---
 
-## 💎 Philosophy
+## 📜 License
 
-This is the **most perfectionist OX standard in existence**:
-- ⚡ Lag-free
-- 🎨 Beautiful
-- 🔧 Full-featured
-- 🐉 RDE-style
+```
+###################################################################################
+#                                                                                 #
+#      .:: RED DRAGON ELITE (RDE)  -  BLACK FLAG SOURCE LICENSE v6.66 ::.         #
+#                                                                                 #
+#   PROJECT:    RDE OX DEVELOPMENT STANDARDS v1.0                                 #
+#   ARCHITECT:  .:: RDE ⧌ Shin [△ ᛋᛅᚱᛒᛅᚾᛏᛋ ᛒᛁᛏᛅ ▽] ::. | https://rd-elite.com     #
+#   ORIGIN:     https://github.com/RedDragonElite                                 #
+#                                                                                 #
+#   WARNING: THIS CODE IS PROTECTED BY DIGITAL VOODOO AND PURE HATRED FOR LEAKERS #
+#                                                                                 #
+#   [ THE RULES OF THE GAME ]                                                     #
+#                                                                                 #
+#   1. // THE "FUCK GREED" PROTOCOL (FREE USE)                                    #
+#      You are free to use, edit, and abuse this code on your server.             #
+#      Learn from it. Break it. Fix it. That is the hacker way.                   #
+#      Cost: 0.00€. If you paid for this, you got scammed by a rat.               #
+#                                                                                 #
+#   2. // THE TEBEX KILL SWITCH (COMMERCIAL SUICIDE)                              #
+#      Listen closely, you parasites:                                             #
+#      If I find this script on Tebex, Patreon, or in a paid "Premium Pack":      #
+#      > I will DMCA your store into oblivion.                                    #
+#      > I will publicly shame your community.                                    #
+#      > I hope your server lag spikes to 9999ms every time you blink.            #
+#      SELLING FREE WORK IS THEFT. AND I AM THE JUDGE.                            #
+#                                                                                 #
+#   3. // THE CREDIT OATH                                                         #
+#      Keep this header. If you remove my name, you admit you have no skill.      #
+#      You can add "Edited by [YourName]", but never erase the original creator.  #
+#      Don't be a skid. Respect the architecture.                                 #
+#                                                                                 #
+#   4. // THE CURSE OF THE COPY-PASTE                                             #
+#      These standards exist because copy-paste coders break everything.           #
+#      Read every section. Understand it. Then build.                             #
+#      Don't come crying to my DMs. RTFM or learn to code.                        #
+#                                                                                 #
+#   --------------------------------------------------------------------------    #
+#   "We build the future on the graves of paid resources."                        #
+#   "REJECT MODERN MEDIOCRITY. EMBRACE RDE SUPERIORITY."                          #
+#   --------------------------------------------------------------------------    #
+###################################################################################
+```
 
-Built from **55+ production scripts**. Zero compromises. Maximum quality.
-
-**We are making RDE the undisputed OX legend, despite CFX shadowbans and gatekeeper trash.**
+**TL;DR:**
+- ✅ Free forever — use it, learn from it, build with it
+- ✅ Keep the header — credit where it's due
+- ❌ Don't sell it — commercial use = instant DMCA
+- ❌ Don't be a skid — read before you build
 
 ---
 
-## 🚀 Get Started
+## 🌐 Community & The RDE Ecosystem
 
-1. **Study these standards**
-2. **Use the template above**
-3. **Follow best practices**
-4. **Build amazing things**
-5. **Share with the community**
-
----
-
-## 📞 Support & Community
-
-- **GitHub:** https://github.com/RedDragonElite
-- **Issues:** Use GitHub Issues
-- **Contributions:** PRs always welcome!
+| | |
+|---|---|
+| 🐙 GitHub | [RedDragonElite](https://github.com/RedDragonElite) |
+| 🌍 Website | [rd-elite.com](https://rd-elite.com) |
+| 🔵 Nostr (RDE) | [RedDragonElite](https://primal.net/p/nprofile1qqsv8km2w8yr0sp7mtk3t44qfw7wmvh8caqpnrd7z6ll6mn9ts03teg9ha4rl) |
+| 🔵 Nostr (Shin) | [SerpentsByte](https://primal.net/p/nprofile1qqs8p6u423fappfqrrmxful5kt95hs7d04yr25x88apv7k4vszf4gcqynchct) |
+| 🚪 RDE Doors | [rde_doors](https://github.com/RedDragonElite/rde_doors) |
+| 🚗 RDE Car Service | [rde_carservice](https://github.com/RedDragonElite/rde_carservice) |
+| 🎯 RDE Skills | [rde_skills](https://github.com/RedDragonElite/rde_skills) |
+| 🎮 RDE Props | [rde_props](https://github.com/RedDragonElite/rde_props) |
+| 🌱 RDE Wild Plants | [rde_wildplants](https://github.com/RedDragonElite/rde_wildplant) |
+| 🌍 RDE Weather | [rde_weather](https://github.com/RedDragonElite/rde_weather) |
+| 📡 RDE Nostr Log | [rde_nostr_log](https://github.com/RedDragonElite/rde_nostr_log) |
 
 ---
 
 <div align="center">
 
-**The future is ours.** 🐍🔥
+*"We build the future on the graves of paid resources."*
 
-**We are already inside.**
+**REJECT MODERN MEDIOCRITY. EMBRACE RDE SUPERIORITY.**
 
-**RDE FOREVER. SYSTEM FAILURE.** ⚡777⚡
+🐉 Made with 🔥 by [Red Dragon Elite](https://rd-elite.com)
 
----
-
-*Built with passion by Red Dragon Elite*
-
-*No paywalls. No gatekeepers. Just quality code.*
+[⬆ Back to Top](#-rde--ox-development-standards-v10)
 
 </div>
