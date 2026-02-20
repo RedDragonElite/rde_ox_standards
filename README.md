@@ -794,7 +794,7 @@ end)
 #      Don't be a skid. Respect the architecture.                                 #
 #                                                                                 #
 #   4. // THE CURSE OF THE COPY-PASTE                                             #
-#      These standards exist because copy-paste coders break everything.           #
+#      These standards exist because copy-paste coders break everything.          #
 #      Read every section. Understand it. Then build.                             #
 #      Don't come crying to my DMs. RTFM or learn to code.                        #
 #                                                                                 #
